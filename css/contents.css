@@ -1,0 +1,84 @@
+.smc-background {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.smc-dummy-textarea {
+  position: absolute;
+  display: block;
+  outline: none;
+  box-shadow:none;
+  padding: 0px;
+  margin: 0px;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+
+.smc-dialog {
+  font-family: Lato,appleLogo,sans-serif;
+  color: #454545;
+  background: #fefefe;
+  border-radius: 3px;
+  box-shadow: 0 1px 10px rgba(0 ,0 ,0 ,.6);
+  width: 450px;
+  margin: 5% auto;
+}
+
+.smc-dialog-header {
+  background-color: #f2f2f2;
+  border-radius: 3px;
+  color: #888;
+  padding: 5px 10px;
+}
+
+.smc-dialog-body {
+  padding: 15px;
+}
+
+.smc-dialog-description {
+  padding: 0px 0px 15px 0px;
+}
+
+.smc-dialog-message {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 5px;
+  word-break: break-all;
+}
+.smc-dialog-footer {
+  padding: 0px 15px 10px 15px;
+  text-align: right;
+}
+
+.smc-dialog-btn {
+  background: #2a7fb2;
+  border: #2a7fb2 solid 1px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 900;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 15px;
+  text-decoration: none;
+  text-align: center;
+  min-width: 60px;
+  position: relative;
+  transition: color .1s;
+}
+
+.smc-dialog-btn:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.smc-dialog-btn-outline {
+  color: #767676 !important;
+  background: #fefefe;
+  border-color: #cfcfcf;
+}

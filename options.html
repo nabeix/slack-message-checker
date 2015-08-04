@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="css/pure-min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/options.css">
+        <script src="js/vue.min.js"></script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/options.js"></script>
+    </head>
+    <body>
+        <div id="team-dialog" class="dialog-background">
+            <div class="dialog">
+                <div class="dialog-content">
+                    Please enter a slack team name.
+                </div>
+                <div class="dialog-content" id="dialog-error">
+                    Error: invalid team name.
+                </div>
+                <div class="dialog-content pure-form">
+                    http:// <input type="text" id="team-text-input" size="20"> .slack.com
+                </div>
+                <div class="dialog-content">
+                    <a class="pure-button pure-button-success" id="dialog-cancel">cancel</a> <a class="pure-button pure-button-primary" id="dialog-ok">add</a>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <div class="pure-u-1-5 header-new">
+                <a class="pure-button pure-button-success" id="new-team">add team</a>
+            </div><div class="pure-u-3-5"><h1>Slack Message Checker</h1></div><div class="pure-u-1-5 header-save">
+                <a class="pure-button pure-button-primary" id="save-btn">save</a>
+            </div>
+        </div>
+        <div id="main" >
+            <h2>General</h2>
+            <p>General rules are applied to all teams(*.slack.com). If you want to create rules for a specific team, click "add team" button in the top left of this page. Team specific rules override general rules.</p>
+            <form class="pure-form">
+                <table class="pure-table pure-table-horizontal rules-table">
+                    <thead>
+                        <th>keyword</th>
+                        <th>match type</th>
+                        <th>action</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr v-repeat="general">
+                            <td><input type="text" v-model="text" size="40"></td>
+                            <td>
+                                <label>
+                                    <input type="radio" name="general-{{$index}}" value="contain" v-model="mode"> contain
+                                </label>
+                                <label>
+                                    <input type="radio" name="general-{{$index}}" value="equal" v-model="mode"> equal
+                                </label>
+                                <label>
+                                    <input type="radio" name="general-{{$index}}" value="regexp" v-model="mode"> regexp
+                                </label>
+                            </td>
+                            <td>
+                                <select v-model="action">
+                                    <option>block</option>
+                                    <option>confirm</option>
+                                </select>
+                            </td>
+                            <td><a class="pure-button" v-on="click: deleteGeneralFilter($index)">remove</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><a class="pure-button pure-button-primary" v-on="click: addGeneralFilter()">add</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div v-repeat="teams">
+                <hr>
+                <div class="team-header"><h2>{{name}}.slack.com</h2><span class="remove-team"><a v-on="click: deleteTeam($index)"><i class="fa fa-times"></i></a></span></div>
+                <form class="pure-form">
+                    <table class="pure-table pure-table-horizontal rules-table"">
+                        <thead>
+                            <th>keyword</th>
+                            <th>match type</th>
+                            <th>channels <a class="has-tooltip">?<span class="tooltip">A comma-separated list of channel names(without "#") can be used.<br>An empty text or a single asterisk("*") matches all channels.</span></a></th>
+                            <th>action</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr v-repeat="filters">
+                                <td><input type="text" v-model="text" size="40"></td>
+                                <td>
+                                    <label>
+                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="contain" v-model="mode"> contain
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="equal" v-model="mode"> equal
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="regexp" v-model="mode"> regexp
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="text" v-model="channel.text" size="20">
+                                </td>
+                                <td>
+                                    <select v-model="action">
+                                        <option>block</option>
+                                        <option>confirm</option>
+                                    </select>
+                                </td>
+                                <td><a class="pure-button" v-on="click: deleteTeamFilter($parent.$index, $index)">remove</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5"><a class="pure-button pure-button-primary" v-on="click: addTeamFilter($index)">add</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
