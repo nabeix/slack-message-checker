@@ -3,7 +3,7 @@
 
   "name": "Slack Message Checker",
   "description": "This extension checks your message and shows an alert before sending in Slack.",
-  "version": "0.1",
+  "version": "1.0.0",
   "content_scripts": [
     {
       "matches": ["https://*.slack.com/*"],
