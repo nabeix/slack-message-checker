@@ -16,8 +16,7 @@
                 <div class="dialog-content">
                     Please enter a slack team name.
                 </div>
-                <div class="dialog-content" id="dialog-error">
-                    Error: invalid team name.
+                <div class="dialog-content error" id="dialog-error">
                 </div>
                 <div class="dialog-content pure-form">
                     http:// <input type="text" id="team-text-input" size="20"> .slack.com
@@ -35,45 +34,51 @@
             </div>
         </div>
         <div id="main" >
-            <h2>General</h2>
-            <p>General rules are applied to all teams(*.slack.com). If you want to create rules for a specific team, click "add team" button in the top left of this page. Team specific rules are prior to the  general rules.</p>
-            <form class="pure-form">
-                <table class="pure-table pure-table-horizontal rules-table">
-                    <thead>
-                        <th>keyword</th>
-                        <th>match type</th>
-                        <th>action</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        <tr v-repeat="general">
-                            <td><input type="text" v-model="text" size="40"></td>
-                            <td>
-                                <label>
-                                    <input type="radio" name="general-{{$index}}" value="contain" v-model="mode"> contain
-                                </label>
-                                <label>
-                                    <input type="radio" name="general-{{$index}}" value="equal" v-model="mode"> equal
-                                </label>
-                                <label>
-                                    <input type="radio" name="general-{{$index}}" value="regexp" v-model="mode"> regexp
-                                </label>
-                            </td>
-                            <td>
-                                <select v-model="action">
-                                    <option>block</option>
-                                    <option>confirm</option>
-                                </select>
-                            </td>
-                            <td><a class="pure-button" v-on="click: deleteGeneralFilter($index)">remove</a></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><a class="pure-button pure-button-primary" v-on="click: addGeneralFilter()">add</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <div v-repeat="teams">
+            <div class="info" id="info"></div>
+            <div>
+                <h2>General</h2>
+                <p>General rules are applied to all teams(*.slack.com). If you want to create rules for a specific team, click "add team" button in the top left of this page. Team specific rules are prior to the  general rules.</p>
+                <form class="pure-form">
+                    <table class="pure-table pure-table-horizontal rules-table">
+                        <thead>
+                            <th>keyword</th>
+                            <th>match type</th>
+                            <th>action</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr class="rule" v-repeat="general">
+                                <td>
+                                    <div><input class="keyword" "type="text" v-model="text | keywordValidator" size="40"></div>
+                                    <div class="error"></div>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input type="radio" name="general-{{$index}}" value="contain" v-model="mode | matchTypeValidator"> contain
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="general-{{$index}}" value="equal" v-model="mode | matchTypeValidator"> equal
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="general-{{$index}}" value="regexp" v-model="mode | matchTypeValidator"> regexp
+                                    </label>
+                                </td>
+                                <td>
+                                    <select v-model="action">
+                                        <option>block</option>
+                                        <option>confirm</option>
+                                    </select>
+                                </td>
+                                <td><a class="pure-button" v-on="click: deleteGeneralFilter($index)">remove</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><a class="pure-button pure-button-primary" v-on="click: addGeneralFilter()">add</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="rules" v-repeat="teams">
                 <hr>
                 <div class="team-header"><h2>{{name}}.slack.com</h2><span class="remove-team"><a v-on="click: deleteTeam($index)"><i class="fa fa-times"></i></a></span></div>
                 <form class="pure-form">
@@ -86,17 +91,20 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr v-repeat="filters">
-                                <td><input type="text" v-model="text" size="40"></td>
+                            <tr class="rule" v-repeat="filters">
+                                <td>
+                                    <div><input class="keyword" type="text" v-model="text | keywordValidator" size="40"></div>
+                                    <div class="error"></div>
+                                </td>
                                 <td>
                                     <label>
-                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="contain" v-model="mode"> contain
+                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="contain" v-model="mode | matchTypeValidator"> contain
                                     </label>
                                     <label>
-                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="equal" v-model="mode"> equal
+                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="equal" v-model="mode | matchTypeValidator"> equal
                                     </label>
                                     <label>
-                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="regexp" v-model="mode"> regexp
+                                        <input type="radio" name="team{{$parent.$index}}-{{$index}}" value="regexp" v-model="mode | matchTypeValidator"> regexp
                                     </label>
                                 </td>
                                 <td>
