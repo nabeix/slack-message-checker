@@ -12,8 +12,8 @@
         <script src="js/options.js"></script>
     </head>
     <body>
-        <div id="team-dialog" class="dialog-background">
-            <div class="dialog">
+        <div id="team-dialog" class="flp-modal flp-animation-none">
+            <div class="content">
                 <div class="dialog-content">
                     Please enter a slack team name.
                 </div>
@@ -87,7 +87,7 @@
                         <thead>
                             <th>keyword</th>
                             <th>match type</th>
-                            <th>channels <a class="has-tooltip">?<span class="tooltip">A comma-separated list of channel names(without "#") can be used.<br>An empty text or a single asterisk("*") matches all channels.</span></a></th>
+                            <th>channels <a class="flp-tooltip-holder has-tooltip">?<span class="flp-tooltip-right flp-enable-hover tooltip">A comma-separated list of channel names(without "#") can be used.<br>An empty text or a single asterisk("*") matches all channels.</span></a></th>
                             <th>action</th>
                             <th></th>
                         </thead>

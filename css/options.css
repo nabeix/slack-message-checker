@@ -74,14 +74,11 @@ h1, h2 {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
-.dialog {
+#team-dialog .content {
   width: 400px;
-  background-color: #fff;
+  text-align: center;
   border-radius: 3px;
   box-shadow: 0 1px 10px rgba(0 ,0 ,0 ,.6);
-  margin: 5% auto 0 auto;
-  padding: 5px;
-  text-align: center;
 }
 
 .dialog-content {
@@ -89,20 +86,11 @@ h1, h2 {
 }
 
 .tooltip {
-  display: none;
-  padding: 10px;
-  border-radius: 3px;
-  margin-left: 8px;
-  margin-top: -10px;
-  background-color: #333;
-  color: #fff;
+  font-size: 12px;
   text-decoration: none;
   font-weight: normal;
-}
-
-.has-tooltip:hover .tooltip{
-  display: inline;
-  position: absolute;
+  width: 400px;
+  text-align: left;
 }
 
 .has-tooltip {

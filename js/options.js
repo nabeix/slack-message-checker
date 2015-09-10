@@ -13,7 +13,6 @@ $(function() {
   initialize();
 
   function initialize() {
-    $("#team-dialog").hide();
     $("#info").hide();
     $("#new-team").bind("click", openNewTeamDialog);
     $("#dialog-ok").bind("click", addNewTeam);
@@ -96,13 +95,13 @@ $(function() {
   }
 
   function openNewTeamDialog() {
-    $("#team-dialog").show();
+    $("#team-dialog").addClass("flp-show");
     $("#dialog-error").text("");
     $("#team-text-input").val("").focus();
   }
 
   function closeNewTeamDialog() {
-    $("#team-dialog").hide();
+    $("#team-dialog").removeClass("flp-show");
   }
 
   function addNewTeam() {
@@ -120,7 +119,7 @@ $(function() {
     var filters = [];
     filters.push($.extend(true, {}, filterTemplate));
     vm.teams.push({name: team, filters: filters});
-    $("#team-dialog").hide();
+    closeNewTeamDialog();
   }
 
   function requestHideInfo() {
